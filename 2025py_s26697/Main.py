@@ -1,3 +1,10 @@
+# Cel programu:
+# Program generuje losową sekwencję DNA o zadanej długości, zapisuje ją w formacie FASTA do pliku
+# oraz oblicza statystyki procentowe występowania nukleotydów A, C, G, T
+# i stosunek %CG do %AT. Dodatkowo wstawia podane imię w losowym miejscu sekwencji,
+# ale nie wpływa ono na statystyki ani długość sekwencji.
+# Program może być wykorzystywany do nauki bioinformatyki oraz obsługi formatu FASTA.
+
 import random  # Importujemy biblioteke random która umożliwia generowanie liczb pseudolosowych
 import re  # Importujemy regex w celu walidacji danych
 
