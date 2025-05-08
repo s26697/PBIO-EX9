@@ -1,4 +1,5 @@
 import random  # Importujemy biblioteke random która umożliwia generowanie liczb pseudolosowych
+import re  # Importujemy regex w celu walidacji danych
 
 
 def generate_dna_sequence(length):  # metoda zwracajaca wygenerowana sekwencje ACTG
@@ -46,10 +47,43 @@ def calculate_statistics(sequence):  # funkcja generująca statystyki dla podane
 
 
 def main():
-    length = int(input("Podaj długość sekwencji: "))  # użytkownik podaje długosc sekwencji
-    seq_id = input("Podaj ID sekwencji: ")  # użytkownik podaje id sekwencji
-    description = input("Podaj opis sekwencji: ")  # użytkownik podaje opis sekwencji
-    name = input("Podaj imię: ")  # użytkownik podaje imie do wklejenia
+    # ORGINAL:
+    # length = int(input("Podaj długość sekwencji: "))
+    # seq_id = input("Podaj ID sekwencji: ")
+    # description = input("Podaj opis sekwencji: ")
+    # name = input("Podaj imię: ")
+
+    # MODIFIED (Poprawka nr 3 dodałem podstawową walidacje dla każdej zmiennej w celu zminimalizowania błędów w działaniu programu i poprawienia user experience)
+    while True:
+        try:
+            length = int(input("Podaj długość sekwencji: "))  # użytkownik podaje długosc sekwencji
+            if length > 0:  # jezeli podany int spelnia warunek przerywa petle
+                break
+            else:
+                print(
+                    "Długość sekwencji musi być liczbą większą od zera.")  # wypisanie komunikatu o nieprawidłowej dlugosci podanego inta
+        except ValueError:
+            print(
+                "Wprowadź prawidłową liczbę całkowitą.")  # w przypadku wystapienia wyjatku zwiazanego z nieprawidlowym formatem podanej zmiennej wypisz komunikat
+    while True:
+        seq_id = input("Podaj ID sekwencji: ")  # użytkownik podaje id sekwencji
+        if re.fullmatch(r'[A-Za-z0-9_-]+', seq_id):
+            break
+        else:
+            print("ID może zawierać tylko litery, cyfry, podkreślenia (_) i myślniki (-).")
+    while True:
+        description = input(
+            "Podaj opis sekwencji: ").strip()  # użytkownik podaje opis sekwencji strip usuwa białe znaki
+        if description:  # jezeli opis jest prawidlowy - nie pusty przerywa petle
+            break
+        else:
+            print("Opis nie może być pusty.")  # wypisuje komunikat o bledzie
+    while True:
+        name = input("Podaj Imie: ").strip()  # użytkownik podaje imie do wklejenia strip usuwa biale znaki
+        if name:  # jezeli imie jest prawidlowe - nie puste przerywa petle
+            break
+        else:
+            print("Imie nie może być puste.")  # wypisuje komunikat o bledzie
 
     #   ORIGINAL:
     #   dna_sequence = generate_dna_sequence(length)
